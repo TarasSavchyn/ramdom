@@ -16,7 +16,7 @@ class Bank(models.Model):
     address = models.ForeignKey(
         "Address", on_delete=models.CASCADE, related_name="banks"
     )
-    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="banks")
+    users = models.ManyToManyField(User, related_name="banks")
 
     def __str__(self):
         return self.name
@@ -26,7 +26,7 @@ class Address(models.Model):
     street = models.CharField(max_length=255)
     city = models.CharField(max_length=100)
     country = models.CharField(max_length=100)
-    postal_code = models.CharField(max_length=10)
+    postal_code = models.CharField(max_length=10, blank=True, null=True)
 
     class Meta:
         unique_together = [["street", "city", "country"]]
