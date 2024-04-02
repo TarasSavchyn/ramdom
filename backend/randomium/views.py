@@ -1,3 +1,4 @@
+from drf_spectacular.utils import OpenApiParameter, extend_schema
 from rest_framework import viewsets
 
 from randomium.models import Bank, Address
@@ -24,6 +25,25 @@ class BankViewSet(viewsets.ModelViewSet):
             queryset = queryset.filter(address__country=country)
 
         return queryset
+
+    @extend_schema(
+        parameters=[
+            OpenApiParameter(
+                name="city",
+                type={"type": "string"},
+                description="Filtering by city.",
+                required=False,
+            ),
+            OpenApiParameter(
+                name="country",
+                type={"type": "string"},
+                description="Filtering by country.",
+                required=False,
+            ),
+        ]
+    )
+    def list(self, request, *args, **kwargs):
+        return super().list(request, *args, **kwargs)
 
 
 class AddressViewSet(viewsets.ModelViewSet):
