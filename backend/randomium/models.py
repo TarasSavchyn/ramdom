@@ -1,5 +1,7 @@
 from django.contrib.auth import get_user_model
+from django.core.exceptions import ValidationError
 from django.db import models
+from django.utils.translation import gettext_lazy as _
 
 User = get_user_model()
 
@@ -27,6 +29,11 @@ class Address(models.Model):
     city = models.CharField(max_length=100)
     country = models.CharField(max_length=100)
     postal_code = models.CharField(max_length=10, blank=True, null=True)
+
+    def clean(self):
+        super().clean()
+        if self.postal_code is not None and len(self.postal_code) < 5:
+            raise ValidationError(_("Postal code must be at least 5 characters long."))
 
     class Meta:
         unique_together = [["street", "city", "country"]]
