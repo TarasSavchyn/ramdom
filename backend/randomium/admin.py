@@ -1,3 +1,6 @@
 from django.contrib import admin
 
-# Register your models here.
+from randomium.models import Address, Bank
+
+admin.site.register(Address)
+admin.site.register(Bank)
