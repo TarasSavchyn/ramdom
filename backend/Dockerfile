@@ -15,9 +15,6 @@ RUN pip install --upgrade pip
 COPY ./backend .
 RUN pip install -r requirements.txt
 
-# Create necessary directories
-RUN mkdir -p /app/media/uploads/
-
 # Add a non-root user and set file permissions
 RUN adduser \
     --disabled-password \
