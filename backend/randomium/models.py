@@ -18,7 +18,6 @@ class Bank(models.Model):
     address = models.ForeignKey(
         "Address", on_delete=models.CASCADE, related_name="banks"
     )
-    users = models.ManyToManyField(User, related_name="banks")
 
     def __str__(self):
         return self.name
