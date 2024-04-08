@@ -8,7 +8,7 @@ const BankForm = ({bankData, onChange, onSubmit, onCancel}) => {
     useEffect(() => {
         async function fetchAddresses() {
             try {
-                const addressesResponse = await axios.get('/api/randomium/addresses/');
+                const addressesResponse = await axios.get('http://localhost:8080/api/randomium/addresses/');
                 setAddresses(addressesResponse.data);
                 setLoading(false); // Update loading state
             } catch (error) {

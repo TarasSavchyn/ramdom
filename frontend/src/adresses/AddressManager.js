@@ -13,7 +13,7 @@ const AddressManager = () => {
     useEffect(() => {
         async function fetchAddresses() {
             try {
-                const response = await axios.get('/api/randomium/addresses/');
+                const response = await axios.get('http://localhost:8080/api/randomium/addresses/');
                 setAddresses(response.data);
             } catch (error) {
                 console.error('Error fetching addresses:', error);
@@ -39,7 +39,7 @@ const AddressManager = () => {
 
     const handleEditAddress = async () => {
         try {
-            const response = await axios.put(`/api/randomium/addresses/${editAddressId}/`, editAddressData);
+            const response = await axios.put(`http://localhost:8080/api/randomium/addresses/${editAddressId}/`, editAddressData);
             const updatedAddresses = addresses.map(address =>
                 address.id === editAddressId ? response.data : address
             );
@@ -52,7 +52,7 @@ const AddressManager = () => {
 
     const handleCreateAddress = async () => {
         try {
-            const response = await axios.post('/api/randomium/addresses/', editAddressData);
+            const response = await axios.post('http://localhost:8080/api/randomium/addresses/', editAddressData);
             setAddresses([...addresses, response.data]);
             setEditAddressData({
                 country: '',

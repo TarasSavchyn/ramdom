@@ -14,7 +14,7 @@ const BankManager = () => {
     useEffect(() => {
         async function fetchBanks() {
             try {
-                const response = await axios.get('/api/randomium/banks/');
+                const response = await axios.get('http://localhost:8080/api/randomium/banks/');
                 setBanks(response.data);
             } catch (error) {
                 console.error('Error fetching banks:', error);
@@ -40,7 +40,7 @@ const BankManager = () => {
 
     const handleEditBank = async () => {
         try {
-            const response = await axios.put(`/api/randomium/banks/${editBankId}/`, editBankData);
+            const response = await axios.put(`http://localhost:8080/api/randomium/banks/${editBankId}/`, editBankData);
             const updatedBanks = banks.map(bank =>
                 bank.id === editBankId ? response.data : bank
             );
@@ -53,7 +53,7 @@ const BankManager = () => {
 
     const handleCreateBank = async () => {
         try {
-            const response = await axios.post('/api/randomium/banks/', editBankData);
+            const response = await axios.post('http://localhost:8080/api/randomium/banks/', editBankData);
             setBanks([...banks, response.data]);
             setEditBankData({
                 name: '',

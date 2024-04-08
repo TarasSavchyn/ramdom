@@ -8,7 +8,7 @@ class ExportAddresses extends React.Component {
     }
 
     handleExport() {
-        axios.get('api/randomium/export-addresses/', {responseType: 'blob'})
+        axios.get('http://localhost:8080/api/randomium/export-addresses/', {responseType: 'blob'})
             .then(response => {
                 const url = window.URL.createObjectURL(new Blob([response.data]));
                 const link = document.createElement('a');

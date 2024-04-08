@@ -17,7 +17,7 @@ const LoginComponent = () => {
 
     const fetchUserData = async (token) => {
         try {
-            const response = await fetch('http://localhost:8000/api/user/me/', {
+            const response = await fetch('http://localhost:8080/api/user/me/', {
                 method: 'GET',
                 headers: {
                     'Authorization': `Token ${token}`
@@ -37,7 +37,7 @@ const LoginComponent = () => {
 
     const handleLogin = async () => {
         try {
-            const response = await fetch('http://localhost:8000/api/user/login/', {
+            const response = await fetch('http://localhost:8080/api/user/login/', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'

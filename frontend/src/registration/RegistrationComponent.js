@@ -15,7 +15,7 @@ const RegistrationComponent = ({onLogin}) => {
 
     const handleRegistration = async () => {
         try {
-            const response = await fetch('http://localhost:8000/api/user/register/', {
+            const response = await fetch('http://localhost:8080/api/user/register/', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -25,7 +25,7 @@ const RegistrationComponent = ({onLogin}) => {
             const data = await response.json();
             if (response.ok) {
                 // Реєстрація пройшла успішно, тепер робимо запит на вхід
-                const loginResponse = await fetch('http://localhost:8000/api/user/login/', {
+                const loginResponse = await fetch('http://localhost:8080/api/user/login/', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
