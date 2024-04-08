@@ -1,4 +1,6 @@
 # Random
+Test application for adding, editing and deleting data such as addresses and banks.
+
 
 https://github.com/TarasSavchyn/random.git
 
@@ -45,13 +47,11 @@ $ source venv/bin/activate
 In directory backend create file ".env" with the following content:
 
 ```python
-SECRET_KEY = django - insecure - 6 @)+w & 9$u
-# ^_t(lyeot%naf8j-#m9#k+k9ra66jgyn6d42bfx3
-POSTGRES_HOST = cornelius.db.elephantsql.com
-POSTGRES_DB = etipyymx
-POSTGRES_USER = etipyymx
-POSTGRES_PASSWORD = 26
-gb925HbCdZE2AO - ug0r2FEiozWI1Ws
+SECRET_KEY=django-insecure-6@)+w&9$u#^_t(lyeot%naf8j-#m9#k+k9ra66jgyn6d42bfx3
+POSTGRES_HOST=cornelius.db.elephantsql.com
+POSTGRES_DB=etipyymx
+POSTGRES_USER=etipyymx
+POSTGRES_PASSWORD=26gb925HbCdZE2AO-ug0r2FEiozWI1Ws
 ```
 
 Random/backend$ :
@@ -77,14 +77,14 @@ $ npm install
 ```
 
 ```sh
-$ npm run dev
+$ npm start
 ```
 
 Go to the web browser and enter http://localhost:3000/
 
 ## Docker
 
-In directory backend create file ".env" with the following content:
+Create file ".env" with the following content:
 
 ```python
 SECRET_KEY=django-insecure-6@)+w&9$u#^_t(lyeot%naf8j-#m9#k+k9ra66jgyn6d42bfx3
@@ -98,42 +98,35 @@ After that create the file "docker-compose.yml"
 
 ```python
 version: "3.4"
-
 services:
-backend:
-image: savik1992 / random - backend:latest
-ports:
-- "8080:8080"
-command: sh - c
-"python manage.py migrate && python manage.py runserver 0.0.0.0:8080"
-env_file:
-- backend /.env
-depends_on:
-- db
-healthcheck:
-test: ["CMD-SHELL", "pg_isready -U habrpguser -d habrdb"]
-interval: 10
-s
-timeout: 5
-s
-retries: 5
-start_period: 10
-s
+  backend:
+    image: savik1992/random-backend:latest
+    ports:
+      - "8080:8080"
+    command: sh -c "python manage.py migrate && python manage.py runserver 0.0.0.0:8080"
+    env_file:
+      - .env
+    depends_on:
+      - db
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U habrpguser -d habrdb"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+  frontend:
+    image: savik1992/random-frontend:latest
+    ports:
+      - "3000:3000"
+    depends_on:
+      - backend
+  db:
+    image: postgres:14-alpine
+    env_file:
+      - .env
 
-frontend:
-image: savik1992 / random - frontend:latest
-ports:
-- "3000:3000"
-depends_on:
-- backend
-
-db:
-image: postgres:14 - alpine
-env_file:
-- .env
 ```
 
-After create directory backend with file .env as in example.
 
 Then open your terminal and navigate to the directory you wish to store the project and run the following commands:
 
