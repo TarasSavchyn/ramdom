@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react';
 import axios from 'axios';
 import AddressForm from './AddressForm';
 import AddressList from './AddressList';
+import ExportAddresses from "../export_csv/ExportAddresses";
 
 const AddressManager = () => {
     const [addresses, setAddresses] = useState([]);
@@ -79,7 +80,7 @@ const AddressManager = () => {
             <AddressForm
                 addressData={editing ? editAddressData : {country: '', city: '', street: '', postal_code: ''}}
                 onChange={handleEditChange}
-                onSubmit={editing ? handleEditAddress : handleCreateAddress} // Fixed
+                onSubmit={editing ? handleEditAddress : handleCreateAddress}
                 onCancel={handleCancelEdit}
             />
             <AddressList addresses={addresses} onEdit={address => {
@@ -87,6 +88,7 @@ const AddressManager = () => {
                 setEditAddressId(address.id);
                 setEditing(true);
             }} onDelete={handleDeleteAddress}/>
+            <ExportAddresses/>
         </div>
     );
 };

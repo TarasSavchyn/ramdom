@@ -3,6 +3,7 @@ import React, {useEffect, useState} from 'react';
 import axios from 'axios';
 import BankForm from './BankForm';
 import BankList from './BankList';
+import ExportBank from "../export_csv/ExportBank";
 
 const BankManager = () => {
     const [banks, setBanks] = useState([]);
@@ -87,6 +88,7 @@ const BankManager = () => {
                 setEditBankId(bank.id);
                 setEditing(true);
             }} onDelete={handleDeleteBank}/>
+            <ExportBank/>
         </div>
     );
 };

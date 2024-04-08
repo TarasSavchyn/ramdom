@@ -36,7 +36,7 @@ const BankForm = ({bankData, onChange, onSubmit, onCancel}) => {
                 value={bankData.rating}
                 onChange={onChange}
             />
-            {loading ? ( // Conditionally render loading indicator
+            {loading ? (
                 <p>Loading...</p>
             ) : (
                 <>
