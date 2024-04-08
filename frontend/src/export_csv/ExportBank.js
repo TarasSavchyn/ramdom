@@ -1,0 +1,32 @@
+import React from 'react';
+import axios from 'axios';
+
+class ExportBank extends React.Component {
+    constructor(props) {
+        super(props);
+        this.handleExport = this.handleExport.bind(this);
+    }
+
+    handleExport() {
+        axios.get('http://localhost:8080/api/randomium/export-banks/', {responseType: 'blob'})
+            .then(response => {
+                const url = window.URL.createObjectURL(new Blob([response.data]));
+                const link = document.createElement('a');
+                link.href = url;
+                link.setAttribute('download', 'banks.csv');
+                document.body.appendChild(link);
+                link.click();
+            })
+            .catch(error => {
+                console.error('Error exporting data:', error);
+            });
+    }
+
+    render() {
+        return (
+            <button onClick={this.handleExport}>Export Banks data to .csv file</button>
+        );
+    }
+}
+
+export default ExportBank;
